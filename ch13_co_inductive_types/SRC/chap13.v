@@ -344,7 +344,7 @@ Proof.
   intro n. rewrite (from_unfold n). 
   split; easy.
 Undo.
-  constructor. trivial.
+  constructor; trivial.
 Undo.
   now split.
 Qed.
