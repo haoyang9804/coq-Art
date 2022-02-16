@@ -4,6 +4,8 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 --->
 # Coq'Art
 
+Coq Training using Coq'Art of coq@8.14.0
+
 [![Docker CI][docker-action-shield]][docker-action-link]
 [![Contributing][contributing-shield]][contributing-link]
 [![Code of Conduct][conduct-shield]][conduct-link]
