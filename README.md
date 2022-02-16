@@ -6,6 +6,8 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 
 Coq Training using Coq'Art of coq@8.14.0
 
+Below is the original README.
+
 [![Docker CI][docker-action-shield]][docker-action-link]
 [![Contributing][contributing-shield]][contributing-link]
 [![Code of Conduct][conduct-shield]][conduct-link]
