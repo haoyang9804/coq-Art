@@ -1,4 +1,5 @@
 Require Export NArith.
+Require Export ZArith.
 Open Scope N_scope.
 
 Definition pos_log2 (p:positive) : N :=
@@ -8,6 +9,37 @@ N.log2 (Npos p).
    of type (n, q) : N * positive such that p = 2^n * q
 
 *)
+Check 33.
+Check (33%nat).
+
+Check (S (S (S (S 0)))).
+
+(* Open Scope nat_scope. *)
+Unset Printing Notations.
+Check 4.
+Set Printing Notations.
+Check (5*(5-4)*7).
+
+(* Open Scope Z_scope.
+Print Scope Z_scope.
+Check (Z.opp (Z.mul 3 (Z.sub (-5)(-8)))).
+Check (plus 3%nat).
+Check (fun a b c : Z => (b*b-4*a*c)%Z). 
+Check (fun f x => Z.abs_nat (f x x)). *)
+(* Check (fun x => x x). *)
+
+Parameter max_int : N.
+Definition min_int := 1-max_int.
+Print min_int.
+
+Section binomial_def.
+Variables a b:Z.
+Definition binomial z:Z := a*z + b. 
+Section trinomial_def.
+Variable c : Z.
+Definition trinomial z:Z := (binomial z)*z + c. 
+End trinomial_def.
+End binomial_def.
 
 Fixpoint decompose2 (p:positive) : N * positive :=
 match p with xH => (0,xH)
