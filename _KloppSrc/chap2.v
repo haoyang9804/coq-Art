@@ -60,3 +60,38 @@ Section h_def.
     Print h.
 End h_def.
 Print h.
+
+Definition Zsqr (z:Z): Z := z*z.
+Definition my_fun (f:Z ->Z) (z:Z): Z := f (f z).
+Eval cbv delta [my_fun Zsqr] in (my_fun Zsqr).
+Eval cbv delta [my_fun] in (my_fun Zsqr).
+(*
+    Putting beta before delta means after delta conversion,
+    we will perform beta conversion.
+*)
+Eval cbv beta delta [my_fun Zsqr] in (my_fun Zsqr).
+
+Eval cbv beta delta [h] in (h 56 78).
+Eval cbv zeta beta delta [h] in (h 56 78).
+
+Check (nat -> nat).
+Check (nat -> nat : Type).
+
+Section domain.
+    Variables (D:Set)(op:D->D->D)(sym:D->D)(e:D). 
+    Let diff : D->D->D := fun (x y:D) => op x (sym y).
+End domain.
+
+Section realization.
+    Variables (A B :Set).   
+    Let spec: Set := (((A->B)->B)->B)->A->B.
+    Let realization : spec
+        := fun (f:((A->B)->B)->B) a => f(fun g => g a).
+    Print realization.
+End realization.
+
+Definition nat_fun_to_Z_fun: Set := (nat->nat)->Z->Z.
+Definition absolute_fun : nat_fun_to_Z_fun :=
+    fun f z => Z_of_nat (f (Z.abs_nat z)).
+Print Z.abs_nat.
+Print Z.of_nat.
