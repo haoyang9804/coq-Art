@@ -11,6 +11,13 @@ Section Minimal_propositional_logic.
   assumption.
  Qed.
 
+Section klopp.
+    Hypotheses (A B C:Prop) (ABC: A->B->C)
+    (a:A) (b:B).
+    Theorem mhy : C.
+    Proof. apply ABC. apply a. apply b. Qed. 
+End klopp.
+Print mhy.
  
  Theorem imp_trans' : (P->Q)->(Q->R)->P->R.
  Proof.
