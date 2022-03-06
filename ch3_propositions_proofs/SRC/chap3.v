@@ -2,6 +2,31 @@
 Section Minimal_propositional_logic.
  Variables P Q R T : Prop.
 
+ Theorem orelse_example : (P->Q)->R->((P->Q)->R->(T->Q)->T)->T.
+ intros H r H0.
+ apply H0; (assumption || intro H1).
+ Abort.
+
+ Lemma L3 : (P->Q)->(P->R)->(P->Q->R->T)->P->T.
+ Proof.
+    intros H H0 H1 p.
+    apply H1; [idtac | apply H | apply H0]; assumption.
+ Qed.
+Print L3.
+Reset L3.
+(* Print L3. *)
+ 
+Section section_for_cut_example. Hypotheses (H : P->Q) (HO
+ : Q->R) (H1 : (P->R)->T->Q) (H2 : (P->R)->T).
+Theorem cut_example : Q.
+Proof.
+    cut (P->R).
+    intros H3.
+    apply H1; [assumption | apply H2; assumption].
+    intro; apply HO; apply H; assumption.
+Qed.
+
+ End section_for_cut_example.
 
  Theorem imp_trans : (P->Q)->(Q->R)->P->R.
  Proof.
@@ -66,6 +91,8 @@ Print mhy.
 
  End proof_of_triple_impl.
 
+ Print triple_impl.
+
 
  Theorem triple_impl_one_liner : (((P->Q)->Q)->Q)->P->Q.
  Proof.
@@ -77,9 +104,6 @@ Print mhy.
   intros H H' p.
   apply H;[assumption | apply H'; assumption].
  Qed.
-
-
-
 
 
  Section section_assert_example.
