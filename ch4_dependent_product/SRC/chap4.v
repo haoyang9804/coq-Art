@@ -107,7 +107,7 @@ Definition binary_word_duplicate (n:nat)(w:binary_word n)
 
 Definition short_concat : short -> short -> long 
                         := @binary_word_concat 32 32.
-
+Print short_concat.
 
 Theorem le_i_SSi : forall i:nat, i <= S (S i).
 Proof (fun i:nat => le_S  (le_S  (le_n i))).
@@ -152,6 +152,15 @@ Definition ackermann (n:nat) : nat->nat :=
           n
           S.
 
+Print ackermann.
+Parameter f : nat->nat.
+Parameter p : nat.
+Check (f (S p)).
+Compute (f (S p)).
+Check iterate.
+Check (iterate f ).
+Check iterate.
+Check (fun (f:nat->nat)(p:nat) => iterate  f (S p) 1).
 
 (** Tests :
 Compute my_plus 9 7.
