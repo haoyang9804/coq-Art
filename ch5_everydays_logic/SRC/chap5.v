@@ -125,6 +125,7 @@ Section ex_falso_quodlibet.
  
  Lemma ex1 : 220 = 284.
  Proof.
+   (*exfalso.*)
    apply False_ind.
    exact ff.
  Qed.
@@ -173,7 +174,8 @@ Qed.
 
 Lemma and_commutes : forall A B:Prop, A /\ B -> B /\ A.
 Proof.
- intros A B H; destruct H.
+  intros A B H. elim H.
+ intros A B H. destruct H.
  split; assumption.
 Qed.
 

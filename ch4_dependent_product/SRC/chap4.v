@@ -219,3 +219,24 @@ Check ex_ind.
 Check and.
 
 *)
+
+Check ex_ind.
+Check ex_intro.
+
+Theorem mhy : forall (P : nat -> Prop) (x : nat) , exists x, P x.
+Proof.
+  eapply ex_ind. Abort.
+
+Theorem trivialProof : exists n, n = 3.
+Proof
+(* @ex_intro nat (fun n => n = 3) 3 eq_refl. *)
+ex_intro (fun n => n = 3) 3 eq_refl.
+
+Check eq_refl.
+
+Check nil.
+
+Fail Check (cons 655 (cons (-273)%Z nil)).
+
+(*The same term with all the implicit arguments given would have had the following form*)
+Fail Check (cons (A:=nat) 655 (cons (A:=Z) (-273)%Z (nil (A:=Z)))).

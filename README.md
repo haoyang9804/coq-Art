@@ -1,97 +1,106 @@
-<!---
-This file was generated from `meta.yml`, please do not edit manually.
-Follow the instructions on https://github.com/coq-community/templates to regenerate.
---->
-# Coq'Art
+# Coq Art
 
-Coq Training using Coq'Art of coq@8.14.0
+## 1. Var 2.2.3
 
-Below is the original README.
+![Screenshot 2022-03-01 011537.png](Coq%20Art%20pics/Screenshot_2022-03-01_011537.png)
 
-[![Docker CI][docker-action-shield]][docker-action-link]
-[![Contributing][contributing-shield]][contributing-link]
-[![Code of Conduct][conduct-shield]][conduct-link]
-[![Zulip][zulip-shield]][zulip-link]
-[![DOI][doi-shield]][doi-link]
+When P is a proposition and the context or the environment contains a declaration of the form `x:P` , then x is a proof term for P.
 
-[docker-action-shield]: https://github.com/coq-community/coq-art/workflows/Docker%20CI/badge.svg?branch=master
-[docker-action-link]: https://github.com/coq-community/coq-art/actions?query=workflow:"Docker%20CI"
+## 2. APP 2.2.3.1
 
-[contributing-shield]: https://img.shields.io/badge/contributions-welcome-%23f7931e.svg
-[contributing-link]: https://github.com/coq-community/manifesto/blob/master/CONTRIBUTING.md
+![Screenshot 2022-03-01 011754.png](Coq%20Art%20pics/Screenshot_2022-03-01_011754.png)
 
-[conduct-shield]: https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-%23f15a24.svg
-[conduct-link]: https://github.com/coq-community/manifesto/blob/master/CODE_OF_CONDUCT.md
+## 3. Abstraction 2.2.3.2
 
-[zulip-shield]: https://img.shields.io/badge/chat-on%20zulip-%23c1272d.svg
-[zulip-link]: https://coq.zulipchat.com/#narrow/stream/237663-coq-community-devs.20.26.20users
+![Screenshot 2022-03-01 011903.png](Coq%20Art%20pics/Screenshot_2022-03-01_011903.png)
 
+This is what tactic `intro` does in coq. `intro H` will move Proof of `A` (typed as `A`) to the context, which is doing the opposite of the Lam theorem.
 
-[doi-shield]: https://zenodo.org/badge/DOI/10.1007/978-3-662-07964-5.svg
-[doi-link]: https://doi.org/10.1007/978-3-662-07964-5
+## 4. Prod-Prop 3.2.1.2 (type representation of abstraction)
 
-Coq'Art is the familiar name for the first book on the Coq proof assistant
-and its underlying theory, the Calculus of Inductive Constructions.
-This project contains the Coq sources of all examples and the solution to 170
-out of over 200 exercises from the book.
+![Screenshot 2022-03-01 012030.png](Coq%20Art%20pics/Screenshot_2022-03-01_012030.png)
 
-## Meta
+## 5
 
-- Author(s):
-  - Yves Bertot (initial)
-  - Pierre Castéran (initial)
-- Coq-community maintainer(s):
-  - Yves Bertot ([**@ybertot**](https://github.com/ybertot))
-  - Pierre Castéran ([**@Casteran**](https://github.com/Casteran))
-- License: [MIT License](LICENSE)
-- Compatible Coq versions: 8.12 or later (use the corresponding release for other Coq versions)
-- Additional dependencies: none
-- Coq namespace: `coqart`
-- Related publication(s):
-  - [Interactive Theorem Proving and Program Development](http://www.labri.fr/perso/casteran/CoqArt/) doi:[10.1007/978-3-662-07964-5](https://doi.org/10.1007/978-3-662-07964-5)
+![Screenshot 2022-03-01 012144.png](Coq%20Art%20pics/Screenshot_2022-03-01_012144.png)
 
-## Building instructions
+## 6. Predicate
 
-``` shell
-git clone https://github.com/coq-community/coq-art
-cd coq-art
-make   # or make -j <number-of-cores-on-your-machine>
+p 97
+
+## 7. Prod-dep
+
+![Screenshot 2022-03-07 005545.png](Coq%20Art%20pics/Screenshot_2022-03-07_005545.png)
+
+## 8. Specification
+
+such as `list A` and `prod A B`. In other words, it’s type is the **sort** ***Set***
+
+## 9 Prod-sup
+
+![Screenshot 2022-03-07 010856.png](Coq%20Art%20pics/Screenshot_2022-03-07_010856.png)
+
+For instance, the types Prop→Prop, Prop→Prop→Prop, and Set→Set all have sort Type.
+
+## 10 Application Typing rule
+
+![Screenshot 2022-03-08 005251.png](Coq%20Art%20pics/Screenshot_2022-03-08_005251.png)
+
+## 11 How to intepret constructs of a term
+
+Take `le_n` and `le_S` for example.
+
+```jsx
+Check le_n.
+le_n : forall n : nat, n <= n.
+
+Check le_S.
+le_S : forall n m : nat, n <= m -> n <= S m.  
 ```
 
-## Documentation
+So, `le_n n m` is a **function** mapping any proof of `n <= m` to a proof of  `n <= S m`
 
-For more information, see the [book website][book-url]
-and the [publisher's website][publisher-url].
+## 12
 
-This repository is also used as the source for the following [web site][community-url].
+![Screenshot 2022-03-08 020130.png](Coq%20Art%20pics/Screenshot_2022-03-08_020130.png)
 
-The repository is structured as follows.
+## 13 Construct Product Type
 
-### Book chapters
+![Screenshot 2022-03-10 005255.png](Coq%20Art%20pics/Screenshot_2022-03-10_005255.png)
 
-1. [A Brief Presentation of Coq](ch1_overview)
-2. [Gallina: Coq as a Programming Language](ch2_types_expressions)
-3. [Propositions and Proofs](ch3_propositions_proofs)
-4. [Dependent Product](ch4_dependent_product)
-5. [Everyday Logic](ch5_everydays_logic)
-6. [Inductive Data Structures](ch6_inductive_data)
-7. [Tactics and automation](ch7_tactics_automation)
-8. [Inductive Predicates](ch8_inductive_predicates)
-9. [Functions and their specification](ch9_function_specification)
-10. [Extraction and imperative programming](ch10_extraction_and_imperative_programs)
-11. [A Case Study: binary search trees](ch11_search_trees)
-12. [The Module System](ch12_modules)
-13. [Infinite Objects and Proofs](ch13_co_inductive_types)
-14. [Foundations of Inductive Types](ch14_fundations_of_inductive_types)
-15. [General Recursion](ch15_general_recursion)
-16. [Proof by reflection](ch16_proof_by_reflection)
+![Screenshot 2022-03-10 010454.png](Coq%20Art%20pics/Screenshot_2022-03-10_010454.png)
 
-### Additional material
+## 14 Barendregt cube
 
-- [Tutorial on type classes](tutorial_type_classes)
-- [Tutorial on inductive and coinductive types](tutorial_inductive_co_inductive_types)
-- [More exercises](more_exercises)
+![Screenshot 2022-03-10 005535.png](Coq%20Art%20pics/Screenshot_2022-03-10_005535.png)
 
-[book-url]: http://www.labri.fr/perso/casteran/CoqArt/
-[publisher-url]: https://www.springer.com/gp/book/9783540208549
-[community-url]: https://coq-community.org/coq-art/
+## 15 Page 118
+
+To repeat: higher-order polymorphism extends the expressive power of typed programming beyond the expressive power of primitive recursion.
+
+## 16 False
+
+![Screenshot 2022-03-12 005108.png](Coq%20Art%20pics/Screenshot_2022-03-12_005108.png)
+
+![Screenshot 2022-03-12 005119.png](Coq%20Art%20pics/Screenshot_2022-03-12_005119.png)
+
+## 17 Equality
+
+![Screenshot 2022-03-12 010655.png](Coq%20Art%20pics/Screenshot_2022-03-12_010655.png)
+
+## 18 Existential Quantification
+
+![Screenshot 2022-03-12 013233.png](Coq%20Art%20pics/Screenshot_2022-03-12_013233.png)
+
+![Screenshot 2022-03-12 013650.png](Coq%20Art%20pics/Screenshot_2022-03-12_013650.png)
+
+![Screenshot 2022-03-12 013739.png](Coq%20Art%20pics/Screenshot_2022-03-12_013739.png)
+
+## 19 Elimination rule
+
+1. Elimination rule for ***conjunction*** is **and_ind** 
+
+![Screenshot 2022-03-13 015652.png](Coq%20Art%20pics/Screenshot_2022-03-13_015652.png)
+
+1. Elmination rule for ***False*** shows how we can use the fact that there is a contradiction in the context.
+2. ***elim*** tactic is the natural tool to apply the elimination rules associated with a given connective.
