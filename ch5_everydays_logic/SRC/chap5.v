@@ -175,6 +175,7 @@ Qed.
 Lemma and_commutes : forall A B:Prop, A /\ B -> B /\ A.
 Proof.
   intros A B H. elim H.
+Restart.
  intros A B H. destruct H.
  split; assumption.
 Qed.
@@ -211,14 +212,30 @@ Proof.
  now rewrite  Zmult_1_l.
 Qed.
 
+
+
 Lemma regroup : forall x:Z, x + x + x + x + x = 5 * x.
 Proof.
- intro x; pattern x at 1.
+  intros; pattern x at 1 2 3 4 5. Print Zmult_1_l.
+Restart.
+ intro x; pattern x at 1. Print Zmult_1_l. Print Z.mul_1_l.
  rewrite <- Zmult_1_l.
  repeat rewrite Zmult_distr_1.
+ auto with zarith.
+Undo.
  reflexivity.
 Qed.
 
+
+Open Scope nat_scope. 
+Theorem plus_permute2 :
+  forall (n m p : nat),  n+m+p = n+p+m.
+Proof.
+  intros. rewrite <- plus_assoc. 
+Restart.
+  intros. rewrite <- plus_assoc. pattern (m+p) at 1. rewrite plus_comm; rewrite plus_assoc.
+  reflexivity.
+Qed.
 
 Open Scope nat_scope. 
 
