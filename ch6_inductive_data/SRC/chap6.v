@@ -31,7 +31,7 @@ forall m:month,
  m=July \/ m=August \/  m=September \/ m=October \/ m=November \/
  m=December.
 Proof.  
- destruct m; auto 12.
+ destruct m; auto 12. 
 Qed.
 
 (** explicit use of maont_ind:
@@ -46,7 +46,10 @@ Proof.
  intro m; pattern m; apply month_ind; auto 12.
 Qed.
 
-
+Theorem bool_equal: forall (b:bool), b = true \/ b = false.
+Proof. 
+  intros. destruct b. left. reflexivity. right. reflexivity.
+Qed.
 
 Definition month_length (leap:bool)(m:month) : nat :=
   match m with

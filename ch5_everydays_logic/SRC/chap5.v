@@ -54,7 +54,9 @@ Qed.
 
 Lemma mult_le_compat_r : forall m n p:nat, le n p -> le (n * m) (p * m).
 Proof.
- intros m n p H; rewrite (mult_comm n m); rewrite (mult_comm p m).
+ intros m n p H.
+ Print mult_comm. Print Nat.mul_comm.
+ rewrite (mult_comm n m). rewrite (mult_comm p m).
  apply mult_le_compat_l; trivial.
 Qed.
 
@@ -231,6 +233,8 @@ Open Scope nat_scope.
 Theorem plus_permute2 :
   forall (n m p : nat),  n+m+p = n+p+m.
 Proof.
+  intros. enough (n+m+p=n+p+m). apply H.
+Restart.
   intros. rewrite <- plus_assoc. 
 Restart.
   intros. rewrite <- plus_assoc. pattern (m+p) at 1. rewrite plus_comm; rewrite plus_assoc.
@@ -281,13 +285,13 @@ Definition my_False : Prop
 
 Theorem my_I : my_True.
 Proof.
- intros P p; assumption.
+ intros P p. assumption.
 Qed.
 
 
 Theorem my_False_ind : forall P:Prop, my_False->P.
 Proof.
- intros P F; apply F.
+ intros P F. apply F.
 Qed.
 
 Definition my_not (P:Prop) : Prop := P->my_False.
@@ -301,8 +305,28 @@ Section leibniz.
 
 
 Theorem leibniz_sym : symmetric A leibniz.
+Proof. 
+ intros x y H Q.
+ apply H. trivial.
+Qed.
+
+Theorem leibniz_refl : reflexive A leibniz.
 Proof.
- intros x y H Q; apply H; trivial.
+  unfold reflexive. intros. unfold leibniz. intros.
+  apply H.
+Qed.
+
+Theorem leibniz_trans : transitive A leibniz.
+Proof.
+  unfold leibniz. unfold transitive. intros.
+  cut (P x). apply H0. apply H. apply H1.
+Qed.
+
+Theorem leibniz_equiv : equiv A leibniz.
+Proof.
+  unfold equiv. try repeat split. 
+  apply leibniz_refl.  apply leibniz_trans.
+  apply leibniz_sym.
 Qed.
 
 End leibniz.

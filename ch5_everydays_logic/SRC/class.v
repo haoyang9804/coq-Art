@@ -1,4 +1,3 @@
-
 Definition peirce := forall P Q:Prop, ((P->Q)->P)->P.
 Definition classic := forall P:Prop, ~~P -> P.
 Definition excluded_middle := forall P:Prop, P\/~P.
