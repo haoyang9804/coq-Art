@@ -59,6 +59,8 @@ Definition month_length (leap:bool)(m:month) : nat :=
   | October => 31 | November => 30 | December => 31
   end.
 
+
+  
 Definition month_length' (leap:bool) :=
   month_rec (fun m:month => nat)
   31 (if leap then 29 else 28) 31 30 31 30 31 31 30 31 30 31.
@@ -79,13 +81,20 @@ Compute  (fun leap => month_length leap November).
 Example  length_february : month_length false February = 28.
 Proof. reflexivity. Qed.
 
+Inductive plane : Set := point : Z->Z->plane.
+Print plane.
+Print plane_ind.
+Print plane_rec.
 (* Definition with Record *)
-
+Reset plane.
 Record plane : Set := point {abscissa : Z; ordinate : Z}.
-
+Print abscissa.
+Print plane.
 Definition in_diagonal (p:plane) :=
   Z_eq_bool (abscissa p) (ordinate p).
 
+Print plane.
+Fail Print plane_ind.
 
 Inductive vehicle : Set :=
   bicycle : nat->vehicle | motorized : nat->nat->vehicle.
@@ -105,7 +114,8 @@ Definition nb_seats (v:vehicle) : nat :=
   | bicycle x => x
   | motorized x _ => x
   end.
-
+Print vehicle_ind.
+Print vehicle_rec.
 Theorem at_least_28 :
  forall (leap:bool)(m:month), 28 <= month_length leap m.
 Proof.

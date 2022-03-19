@@ -104,3 +104,7 @@ To repeat: higher-order polymorphism extends the expressive power of typed progr
 
 1. Elmination rule for ***False*** shows how we can use the fact that there is a contradiction in the context.
 2. ***elim*** tactic is the natural tool to apply the elimination rules associated with a given connective.
+
+## 20 Record Type
+
+![record type.png](Coq%20Art%20pics/record_type.png)
