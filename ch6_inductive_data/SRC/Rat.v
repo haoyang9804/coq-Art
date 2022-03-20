@@ -10,7 +10,7 @@ Axiom
 
 Definition r0 : RatPlus.
 Proof.
- refine (mkRat 4 6 _);  discriminate.  
+ refine (mkRat 4 6 _).  discriminate.  
 Defined.
 
 Definition r1 : RatPlus. 
@@ -20,12 +20,12 @@ Defined.
 
 Lemma r0_eq_r1 : r0 = r1.
 Proof.
- apply eq_RatPlus; auto.
+ apply eq_RatPlus. auto.
 Qed.
 
 Lemma axioms_are_risky : False.
 Proof.
- absurd (r0 = r1);[discriminate | apply r0_eq_r1].
+ absurd (r0 = r1); [discriminate | apply r0_eq_r1].
 Qed.
 
 

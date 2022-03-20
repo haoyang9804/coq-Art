@@ -173,11 +173,17 @@ Proof.
  rewrite H; reflexivity.
 Qed.
 
+(* haoyang: case_eq *)
+
 Theorem next_march_shorter :
  forall (leap:bool)(m1 m2:month), next_month m1 = March ->
    month_length leap m1 <= month_length leap m2.
 Proof.
- intros leap m1 m2 H.
+intros. case m1. Restart.
+ intros leap m1 m2 H. 
+ 
+destruct m1. Undo. case m1. Undo. Locate case_eq. case_eq m1. Undo.
+
  case_eq m1; try  (intro H0; rewrite H0 in H; simpl in H; discriminate H).
   case leap ; case m2 ; simpl; auto with arith.
 Qed.
