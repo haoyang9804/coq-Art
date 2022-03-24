@@ -291,6 +291,7 @@ Fixpoint app {A:Type}(l m:list A) : list A :=
   | cons a l1 => cons a (app  l1 m)
   end.
 
+Print cons.
 
 Definition pred_option (n:nat) : option nat :=
   match n with O => None | S p => Some p end.
@@ -308,6 +309,13 @@ Fixpoint nth_option {A:Type} (n:nat)(l:list A) : option A :=
   | _, nil => None
   end.
 
+Fixpoint nth_option' {A:Type} (n:nat)(l:list A) {struct n} : option A :=
+  match n, l with
+  | O, cons a tl => Some a
+  | S p, cons a tl => nth_option'  p tl
+  | _, nil => None
+  end.
+
 (** Some tests: 
 
 Print fst.
@@ -319,14 +327,28 @@ Check (inl bool 4).
 Check (inr nat false).
 *)
 
+Print sum.
+
+Print fst.
+
+Check (sum nat bool). 
+
+Check (inl bool 4).
+
+Check (inr nat false).
+
+Check (inl bool 4).
+Check (inl 4).
+
 
 Inductive ltree (n:nat) : Set :=
   | lleaf : ltree n
   | lnode : forall p:nat, p <= n -> ltree n -> ltree n -> ltree n.
 
-
 Inductive sqrt_data (n:nat) : Set :=
   sqrt_intro : forall x:nat, x*x <= n -> n <  S x * S x -> sqrt_data n.
+
+Compute (sqrt_data 100). 
 
 Inductive htree (A:Type) : nat->Type :=
   | hleaf : A->htree A 0

@@ -28,9 +28,9 @@ Theorem nth_size : forall {A:Type}(p:nat)(v:t A p)(n:nat),
   vector_nth n v  = None <-> p <= n.
 Proof.
  induction v;simpl; auto. 
- -  intro n; case n; simpl; split; auto with arith. 
+ - intro n; case n; simpl; split; auto with arith. 
  - intro n0;case n0;simpl;split.
-   +    discriminate.
+   +  discriminate.
    +  inversion 1.
    +  case (IHv n1);auto with arith.
    +  case (IHv n1);auto with arith.
