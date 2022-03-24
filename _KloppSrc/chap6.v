@@ -28,3 +28,14 @@ Definition split {A B : Set} : list (A*B) -> list A * list B :=
         end.
 
 Compute (split ([(1,2); (2,3); (3,4)])).
+
+Inductive List (A:Set) : Set :=
+| nil : List A
+| cons : A -> List A -> List A.
+
+Check
+  (fun l:List nat =>
+     match l with
+     | nil _ => nil nat
+     | cons _ _ l' => l'
+     end).

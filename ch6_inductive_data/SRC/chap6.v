@@ -348,11 +348,20 @@ Inductive ltree (n:nat) : Set :=
 Inductive sqrt_data (n:nat) : Set :=
   sqrt_intro : forall x:nat, x*x <= n -> n <  S x * S x -> sqrt_data n.
 
-Compute (sqrt_data 100). 
+Compute (sqrt_data).
+
+Inductive sqrt_data' (n:nat) : Set :=
+  sqrt_intro' : sqrt_data' n.
+
+Compute sqrt_intro'.
+Compute (sqrt_intro' 1).
 
 Inductive htree (A:Type) : nat->Type :=
   | hleaf : A->htree A 0
   | hnode : forall n:nat, A -> htree A n -> htree A n -> htree A (S n).
+
+Check hleaf.
+Check htree_ind.
 
 (**
 
@@ -374,6 +383,7 @@ Fixpoint invert (A:Type)(n:nat)(t:htree A n){struct t} : htree A n :=
   | hnode _ p v t1 t2 => hnode A p v (invert A p t2)(invert A p t1)
   end.
 
+  
 (**
 
 Print Empty_set.
