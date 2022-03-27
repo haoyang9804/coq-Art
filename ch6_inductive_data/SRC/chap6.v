@@ -396,9 +396,34 @@ Inductive strange : Set :=  cs : strange->strange.
 
 Theorem strange_empty : forall x:strange, False.
 Proof.
- intro x; induction x.
+ intro x. induction x.
  assumption.
 Qed.
+
+Theorem strange_empty' : forall x:strange, False.
+Proof.
+ intro x. apply strange_ind.
+ - intros. assumption.
+ - apply x.
+Qed.
+
+Theorem nat_not_strange :  forall n:nat, False.
+Proof.
+ intros x. 
+ Print nat_ind.
+ apply nat_ind.
+ - admit. 
+ - intros; assumption.
+ - apply x. 
+Abort.
+
+Theorem nat_not_strange' :  forall n:nat, False.
+Proof.
+ intros x. 
+ induction x.
+ - admit.
+ -  
+Abort.
 
 (** attempt to prove falsehood
 
