@@ -88,7 +88,7 @@ Open Scope Z_scope.
 
 Theorem ring_example1 : forall x y:Z, (x+y) * (x+y)=x*x + 2*x*y + y*y.
 Proof.
-  intros x y; ring.
+  intros x y. ring.
 Qed.
 
 Definition square (z:Z) := z*z.
@@ -96,19 +96,19 @@ Definition square (z:Z) := z*z.
 Theorem ring_example2 :
   forall x y:Z, square (x+y) = square x + 2*x*y + square y.
 Proof.
-  intros x y; unfold square; ring.
+  intros x y. unfold square. ring.
 Qed.
 
 Theorem ring_example3 : 
   (forall x y:nat, (x+y)*(x+y) = x*x + 2*x*y + y*y)%nat.
 Proof.
-  intros x y; ring.
+  intros x y. ring.
 Qed.
 
 Theorem ring_example4 :
   (forall x:nat, (S x)*(x+1) = x*x + (x+x+1))%nat.
 Proof.
-  intro x; ring_simplify.
+  intro x. ring_simplify.
   trivial.
 Qed.
 
@@ -140,7 +140,7 @@ Open Scope R_scope.
 
 Theorem example_for_field : forall x y:R, y <> 0 ->(x+y) / y = 1  +(x/y).
 Proof.
-  intros x y H; field.
+  intros x y H. field.
   assumption.
 Qed.
 
@@ -185,7 +185,12 @@ Open Scope nat_scope.
 Theorem example_intuition :
   (forall n p q:nat,  n <= p \/ n <= q -> n <= p \/ n <= S q).
 Proof.
-  intros n p q; intuition auto with arith.
+  intros n p q.
+  Fail tauto. Undo.
+  auto. (*Nothing changed*)
+  intuition. Undo.
+  intuition auto with zarith. Undo.
+  intuition auto with arith.
 Qed.
 
 Ltac autoClear h := try (clear h; auto with arith; fail).
