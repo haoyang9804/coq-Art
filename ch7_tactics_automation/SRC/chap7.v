@@ -279,6 +279,14 @@ Section primes.
   Proof. inversion 1; auto.
   Qed.
 
+  Print le_S_star.
+  Print le_plus_minus.
+  Print lt.
+  Lemma try : forall (x1 x2:nat), ~divides x1 x2.
+  Proof. 
+    intros.
+    apply not_divides_lt. unfold lt. 
+    Abort.
 
   Ltac check_not_divides :=
     match goal with
@@ -287,9 +295,19 @@ Section primes.
       rewrite (le_plus_minus _ _ Hle); apply not_divides_plus; 
       simpl; clear Hle; check_not_divides
     | |- _ => apply not_divides_lt; unfold lt; le_S_star
-
     end.
-  Open Scope nat_scope.
+  
+  Ltac check_not_divides2 :=
+  match goal with
+  | |- (~divides ?X1 ?X2) =>
+   fail
+  | |- (divides ?X1 ?X2) => idtac
+  end.
+
+  Lemma try2: ~divides 10 5.
+  Proof.
+    Fail check_not_divides2.
+  Qed.
 
   #[local] Hint Resolve lt_O_Sn : core.
 
@@ -302,6 +320,7 @@ Section primes.
       [clear Hlt; intros Hlt; check_lt_not_divides
       | intros Heq; rewrite Heq; check_not_divides]
     end.
+
 
   Definition is_prime (p:nat) : Prop := 
     forall n:nat, n <> 1 -> lt n p -> ~divides n p.
@@ -326,7 +345,7 @@ Theorem clear_example_thm :
   forall (x y z:nat), x<z->z=2*x->0<x->x=2*y->y<z->x>y.
 Proof.
   intros x y z H H1 H2 H3.
-  generalize H1 H2 H3; clear_all; intros; lia.
+  generalize H1 H2 H3. clear_all; intros; lia.
 Qed.
 
 Theorem S_to_plus_one : forall n:nat, S n = n+1.
